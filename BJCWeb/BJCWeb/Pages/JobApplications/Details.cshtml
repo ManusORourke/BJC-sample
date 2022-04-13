@@ -1,0 +1,61 @@
+﻿@page
+@model BJCWeb.Pages.JobApplications.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>JobApplication</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JobApplication.JobID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobApplication.JobID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JobApplication.ClientID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobApplication.ClientID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JobApplication.IsInterested)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobApplication.IsInterested)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JobApplication.DateApplied)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobApplication.DateApplied)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JobApplication.HasCV)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobApplication.HasCV)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JobApplication.CVID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobApplication.CVID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JobApplication.FreeText)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobApplication.FreeText)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.JobApplication.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

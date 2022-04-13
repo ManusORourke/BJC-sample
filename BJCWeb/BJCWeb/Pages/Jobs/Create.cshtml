@@ -1,0 +1,94 @@
+﻿@page
+@model BJCWeb.Pages.Jobs.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Job</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Job.RefID" class="control-label"></label>
+                <input asp-for="Job.RefID" class="form-control" />
+                <span asp-validation-for="Job.RefID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Job.Title" class="control-label"></label>
+                <input asp-for="Job.Title" class="form-control" />
+                <span asp-validation-for="Job.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Job.Company" class="control-label"></label>
+                <input asp-for="Job.Company" class="form-control" />
+                <span asp-validation-for="Job.Company" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Job.Hours" class="control-label"></label>
+                <input asp-for="Job.Hours" class="form-control" />
+                <span asp-validation-for="Job.Hours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Job.ContractType" class="control-label"></label>
+                <input asp-for="Job.ContractType" class="form-control" />
+                <span asp-validation-for="Job.ContractType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Job.Location" class="control-label"></label>
+                <input asp-for="Job.Location" class="form-control" />
+                <span asp-validation-for="Job.Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Job.Salary" class="control-label"></label>
+                <input asp-for="Job.Salary" class="form-control" />
+                <span asp-validation-for="Job.Salary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Job.Description" class="control-label"></label>
+                <input asp-for="Job.Description" class="form-control" />
+                <span asp-validation-for="Job.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Job.Requirments" class="control-label"></label>
+                <input asp-for="Job.Requirments" class="form-control" />
+                <span asp-validation-for="Job.Requirments" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Job.Benefits" class="control-label"></label>
+                <input asp-for="Job.Benefits" class="form-control" />
+                <span asp-validation-for="Job.Benefits" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Job.Date" class="control-label"></label>
+                <input asp-for="Job.Date" class="form-control" />
+                <span asp-validation-for="Job.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Job.Archived" /> @Html.DisplayNameFor(model => model.Job.Archived)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Job.HideCompany" /> @Html.DisplayNameFor(model => model.Job.HideCompany)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

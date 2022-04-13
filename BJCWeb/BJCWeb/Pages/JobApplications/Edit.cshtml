@@ -1,0 +1,65 @@
+﻿@page
+@model BJCWeb.Pages.JobApplications.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>JobApplication</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="JobApplication.ID" />
+            <div class="form-group">
+                <label asp-for="JobApplication.JobID" class="control-label"></label>
+                <input asp-for="JobApplication.JobID" class="form-control" />
+                <span asp-validation-for="JobApplication.JobID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobApplication.ClientID" class="control-label"></label>
+                <input asp-for="JobApplication.ClientID" class="form-control" />
+                <span asp-validation-for="JobApplication.ClientID" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="JobApplication.IsInterested" /> @Html.DisplayNameFor(model => model.JobApplication.IsInterested)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobApplication.DateApplied" class="control-label"></label>
+                <input asp-for="JobApplication.DateApplied" class="form-control" />
+                <span asp-validation-for="JobApplication.DateApplied" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="JobApplication.HasCV" /> @Html.DisplayNameFor(model => model.JobApplication.HasCV)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobApplication.CVID" class="control-label"></label>
+                <input asp-for="JobApplication.CVID" class="form-control" />
+                <span asp-validation-for="JobApplication.CVID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobApplication.FreeText" class="control-label"></label>
+                <input asp-for="JobApplication.FreeText" class="form-control" />
+                <span asp-validation-for="JobApplication.FreeText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

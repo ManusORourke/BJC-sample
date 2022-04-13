@@ -1,0 +1,40 @@
+﻿@page
+@model BJCWeb.Pages.CVFiles.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CVFile</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CVFile.UserId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CVFile.UserId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CVFile.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CVFile.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CVFile.Content)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CVFile.Content)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="CVFile.ID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

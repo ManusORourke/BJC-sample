@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using BJCWebApp.Data;
 using BJCWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
+using BJCWebApp.Utilities;
+using System.Net.Mime;
 
 namespace BJCWebApp.Controllers
 {
@@ -43,7 +46,7 @@ namespace BJCWebApp.Controllers
                 return NotFound();
             }
 
-            return View(cVFile);
+            return File(cVFile.Content, MediaTypeNames.Application.Octet, cVFile.Title);
         }
 
         // GET: CVFiles/Create
@@ -52,15 +55,31 @@ namespace BJCWebApp.Controllers
             return View();
         }
 
+        private readonly long _fileSizeLimit = 2097152;
+        private readonly string[] _permittedExtensions = { ".docx", ".pdf", ".odt" };
+
         // POST: CVFiles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,UserProfileId,Title,Content")] CVFile cVFile)
+        public async Task<IActionResult> Create([Bind("ID,UserProfileId,Title,Content")] CVFile cVFile, IFormFile uploadFile)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(cVFile);
+            }
+
+            var formFileContent =
+                await FileHelpers.ProcessFormFile<IFormFile>(
+                    uploadFile, ModelState, _permittedExtensions,
+                    _fileSizeLimit);
+
             if (ModelState.IsValid)
             {
+                cVFile.Title = uploadFile.FileName;
+                cVFile.UserProfileId = 1;
+                cVFile.Content = formFileContent;
                 _context.Add(cVFile);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -152,5 +171,6 @@ namespace BJCWebApp.Controllers
         {
             return _context.CVFile.Any(e => e.ID == id);
         }
+
     }
 }

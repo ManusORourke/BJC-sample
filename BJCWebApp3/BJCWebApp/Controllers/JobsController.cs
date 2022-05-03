@@ -22,17 +22,34 @@ namespace BJCWebApp.Controllers
         }
 
         // GET: Jobs
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string locationString, string searchString)
         {
+            // JobLocationViewModel
+            IQueryable<string> locationQuery = from m in _context.Job
+                                            orderby m.Location
+                                            select m.Location;
+
             var jobs = from m in _context.Job
                          select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 //jobs = jobs.Where(s => s.Title!.Contains(searchString));
+                // contains is case sensitive for SQLite, why?
                 jobs = jobs.Where(s => EF.Functions.Like(s.Title, $"%{searchString}%"));
             }
-            return View(await jobs.ToListAsync());
+
+            if (!string.IsNullOrEmpty(locationString))
+            {
+                jobs = jobs.Where(x => x.Location == locationString);
+            }
+            var jobLocationVM = new JobLocationViewModel
+            {
+                Locations = new SelectList(await locationQuery.Distinct().ToListAsync()),
+                Jobs = await jobs.ToListAsync()
+            };
+            return View(jobLocationVM);
+            //return View(await jobs.ToListAsync());
         }
 
         // GET: Jobs/Details/5

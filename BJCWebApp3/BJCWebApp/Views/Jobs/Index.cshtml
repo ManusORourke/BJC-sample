@@ -1,5 +1,5 @@
 ﻿@using BJCWebApp.Data;
-@model IEnumerable<BJCWebApp.Models.Job>
+@model BJCWebApp.Models.JobLocationViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -17,6 +17,9 @@
 <form asp-controller="Jobs" asp-action="Index" method="get">
     <p>
         Title: <input type="text" name="SearchString" />
+        <select asp-for="LocationString" asp-items="Model.Locations">
+            <option value="">All</option>
+        </select>
         <input type="submit" value="Filter" />
     </p>
 </form>
@@ -24,28 +27,28 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RefID)
+                @Html.DisplayNameFor(model => model.Jobs[0].RefID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.Jobs[0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Hours)
+                @Html.DisplayNameFor(model => model.Jobs[0].Hours)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContractType)
+                @Html.DisplayNameFor(model => model.Jobs[0].ContractType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Location)
+                @Html.DisplayNameFor(model => model.Jobs[0].Location)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Salary)
+                @Html.DisplayNameFor(model => model.Jobs[0].Salary)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Jobs)
         {
             <tr>
                 <td>

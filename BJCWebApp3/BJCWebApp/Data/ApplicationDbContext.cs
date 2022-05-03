@@ -13,5 +13,6 @@ namespace BJCWebApp.Data
         public DbSet<BJCWebApp.Models.CVFile>? CVFile { get; set; }
         public DbSet<BJCWebApp.Models.UserProfile>? UserProfile { get; set; }
         public DbSet<BJCWebApp.Models.JobApplication>? JobApplication { get; set; }
+        public DbSet<BJCWebApp.Models.Location>? Location { get; set; }
     }
 }

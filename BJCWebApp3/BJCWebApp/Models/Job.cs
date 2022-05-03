@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace BJCWebApp.Models
 {
@@ -12,7 +13,7 @@ namespace BJCWebApp.Models
             Company = "";
             Hours = "";
             ContractType = "";
-            Location = "";
+            LocationID = 0;
             Salary = "";
             Description = "";
             Requirments = "";
@@ -38,10 +39,12 @@ namespace BJCWebApp.Models
         public string Hours { get; set; }
 
         [JsonPropertyName("contracttype")]
+        [Display(Name = "Contract Type")]
         public string ContractType { get; set; }
 
         [JsonPropertyName("location")]
-        public string Location { get; set; }
+        [Display(Name = "Location")]
+        public int LocationID { get; set; }
 
         [JsonPropertyName("salary")]
         public string Salary { get; set; }
@@ -56,6 +59,8 @@ namespace BJCWebApp.Models
         public string Benefits { get; set; }
 
         [JsonPropertyName("date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
         [JsonPropertyName("archived")]
@@ -63,5 +68,7 @@ namespace BJCWebApp.Models
 
         [JsonPropertyName("hidecompany")]
         public bool HideCompany { get; set; }
+
+        public Location? Location { get; set; }
     }
 }

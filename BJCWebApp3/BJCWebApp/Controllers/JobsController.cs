@@ -26,11 +26,13 @@ namespace BJCWebApp.Controllers
         {
             // JobLocationViewModel
             IQueryable<string> locationQuery = from m in _context.Job
-                                            orderby m.Location
-                                            select m.Location;
+                                               .Include(s => s.Location)
+                                               orderby m.Location.Name
+                                               select m.Location.Name;
 
             var jobs = from m in _context.Job
-                         select m;
+                       .Include(s => s.Location)
+                       select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -41,7 +43,7 @@ namespace BJCWebApp.Controllers
 
             if (!string.IsNullOrEmpty(locationString))
             {
-                jobs = jobs.Where(x => x.Location == locationString);
+                jobs = jobs.Where(x => x.Location.Name == locationString);
             }
             var jobLocationVM = new JobLocationViewModel
             {
@@ -49,7 +51,6 @@ namespace BJCWebApp.Controllers
                 Jobs = await jobs.ToListAsync()
             };
             return View(jobLocationVM);
-            //return View(await jobs.ToListAsync());
         }
 
         // GET: Jobs/Details/5
@@ -61,6 +62,7 @@ namespace BJCWebApp.Controllers
             }
 
             var job = await _context.Job
+                .Include(s => s.Location)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (job == null)
             {
@@ -74,6 +76,7 @@ namespace BJCWebApp.Controllers
         [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
+            PopulateLocationsDropDownList();
             return View();
         }
 
@@ -83,7 +86,7 @@ namespace BJCWebApp.Controllers
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,RefID,Title,Company,Hours,ContractType,Location,Salary,Description,Requirments,Benefits,Date,Archived,HideCompany")] Job job)
+        public async Task<IActionResult> Create([Bind("ID,RefID,Title,Company,Hours,ContractType,LocationID,Salary,Description,Requirments,Benefits,Date,Archived,HideCompany")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -91,6 +94,7 @@ namespace BJCWebApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            PopulateLocationsDropDownList();
             return View(job);
         }
 
@@ -108,6 +112,7 @@ namespace BJCWebApp.Controllers
             {
                 return NotFound();
             }
+            PopulateLocationsDropDownList();
             return View(job);
         }
 
@@ -117,7 +122,7 @@ namespace BJCWebApp.Controllers
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,RefID,Title,Company,Hours,ContractType,Location,Salary,Description,Requirments,Benefits,Date,Archived,HideCompany")] Job job)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,RefID,Title,Company,Hours,ContractType,LocationID,Salary,Description,Requirments,Benefits,Date,Archived,HideCompany")] Job job)
         {
             if (id != job.ID)
             {
@@ -144,6 +149,7 @@ namespace BJCWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            PopulateLocationsDropDownList();
             return View(job);
         }
 
@@ -218,5 +224,14 @@ namespace BJCWebApp.Controllers
 
             return RedirectToAction("Index", "JobApplications");
         }
+
+        private void PopulateLocationsDropDownList(object selectedLocation = null)
+        {
+            var locations = from d in _context.Location
+                                   orderby d.ID
+                                   select d;
+            ViewBag.LocationID = new SelectList(locations.AsNoTracking(), nameof(Location.ID), nameof(Location.Name), selectedLocation);
+        }
+
     }
 }

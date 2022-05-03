@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace BJCWebApp.Models
 {
@@ -24,6 +25,7 @@ namespace BJCWebApp.Models
         public string Name { get; set; }
 
         [JsonPropertyName("phonenumber")]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
         [JsonPropertyName("email")]
@@ -39,15 +41,18 @@ namespace BJCWebApp.Models
         public string Gender { get; set; }
 
         [JsonPropertyName("dateofbirth")]
+        [Display(Name = "Date of birth")]
         public DateTime DateOfBirth { get; set; }
 
         [JsonPropertyName("highestlevelofeducation")]
+        [Display(Name = "Highest level of Education")]
         public int HighestLevelOfEducation { get; set; }
 
         [JsonPropertyName("location")]
         public string Location { get; set; }
 
         [JsonPropertyName("paymenttype")]
+        [Display(Name = "Payment Type")]
         public string PaymentType { get; set; }
     }
 }

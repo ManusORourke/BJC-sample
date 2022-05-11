@@ -1,0 +1,76 @@
+﻿@model BJCWebApp.Models.ProfileJobViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>UserProfile</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserProfile.Name" class="control-label"></label>
+                <input asp-for="UserProfile.Name" class="form-control" />
+                <span asp-validation-for="UserProfile.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserProfile.PhoneNumber" class="control-label"></label>
+                <input asp-for="UserProfile.PhoneNumber" class="form-control" />
+                <span asp-validation-for="UserProfile.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserProfile.Email" class="control-label"></label>
+                <input asp-for="UserProfile.Email" class="form-control" />
+                <span asp-validation-for="UserProfile.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="UserProfile.IsRegistered" /> @Html.DisplayNameFor(model => model.UserProfile.IsRegistered)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserProfile.Gender" class="control-label"></label>
+                <input asp-for="UserProfile.Gender" class="form-control" />
+                <span asp-validation-for="UserProfile.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserProfile.DateOfBirth" class="control-label"></label>
+                <input asp-for="UserProfile.DateOfBirth" class="form-control" />
+                <span asp-validation-for="UserProfile.DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserProfile.HighestLevelOfEducation" class="control-label"></label>
+                <input asp-for="UserProfile.HighestLevelOfEducation" class="form-control" />
+                <span asp-validation-for="UserProfile.HighestLevelOfEducation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserProfile.Location" class="control-label"></label>
+                <input asp-for="UserProfile.Location" class="form-control" />
+                <span asp-validation-for="UserProfile.Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserProfile.PaymentType" class="control-label"></label>
+                <input asp-for="UserProfile.PaymentType" class="form-control" />
+                <span asp-validation-for="UserProfile.PaymentType" class="text-danger"></span>
+            </div>
+            <input asp-for="JobID" class="form-control" type="hidden"/>
+            <input asp-for="UserProfile.UserID" class="form-control" type="hidden" />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

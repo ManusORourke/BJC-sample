@@ -1,0 +1,5 @@
+ID,Archived,Benefits,Company,ContractType,Date,Description,HideCompany,Hours,LocationID,RefID,Requirments,Salary,Title
+0,0,Everything,Anglo Irish Bank,Permanent,2022-04-28 12:04:00,Good job,1,9 - 5,10,12345,Know the right people,"200,000",Chief Financial Officer
+2,0,none,Bread4U,Short term Contract,2022-04-28 12:05:00,Bread and pastries,0,5 - 1,10,54321,QQI 8,"50,000",Chef
+3,0,Weekends off,We Deliver,Short term Contract,2022-05-11 12:42:00,Select products and place on pallet,0,9 - 5,12,23489,Forklift licence required,"50,000",Warehouse Operative
+4,0,Weekends off,DeliveriesRUS,Short term Contract,2022-05-18 00:00:00,Select products and place on pallet,0,9 - 5,10,75434,Forklift licence required,"50,000",Warehouse Operative

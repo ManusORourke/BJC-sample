@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BJCWebApp.Models.CVFile>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (User.IsInRole("Administrator"))
+{
+<h1>Index</h1>    
+} 
+else
+{
+<h1>Your CVs</h1>
+}
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@if (Model.Count() == 0)
+{
+<p>
+    You haven't uploaded a CV yet.
+</p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            @if (User.IsInRole("Administrator"))
+            {
+            <th>
+                @Html.DisplayNameFor(model => model.UserID)
+            </th>
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @if (User.IsInRole("Administrator"))
+            {
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
